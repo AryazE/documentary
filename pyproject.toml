@@ -1,0 +1,63 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "documentary"
+dynamic = ["version"]
+description = 'Improving code documentation'
+readme = "README.md"
+requires-python = ">=3.8"
+license = "MIT"
+keywords = []
+authors = [
+  { name = "Aryaz Eghbali", email = "eghbali.aryaz@gmail.com" },
+]
+classifiers = [
+  "Development Status :: 4 - Beta",
+  "Programming Language :: Python",
+  "Programming Language :: Python :: 3.8",
+  "Programming Language :: Python :: 3.9",
+  "Programming Language :: Python :: 3.10",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: Implementation :: CPython",
+  "Programming Language :: Python :: Implementation :: PyPy",
+]
+dependencies = [
+    "openai",
+]
+
+[project.urls]
+Documentation = "https://github.com/Aryaz Eghbali/documentary#readme"
+Issues = "https://github.com/Aryaz Eghbali/documentary/issues"
+Source = "https://github.com/Aryaz Eghbali/documentary"
+
+[tool.hatch.version]
+path = "src/documentary/__about__.py"
+
+[tool.hatch.envs.types]
+extra-dependencies = [
+  "mypy>=1.0.0",
+]
+[tool.hatch.envs.types.scripts]
+check = "mypy --install-types --non-interactive {args:src/documentary tests}"
+
+[tool.coverage.run]
+source_pkgs = ["documentary", "tests"]
+branch = true
+parallel = true
+omit = [
+  "src/documentary/__about__.py",
+]
+
+[tool.coverage.paths]
+documentary = ["src/documentary", "*/documentary/src/documentary"]
+tests = ["tests", "*/documentary/tests"]
+
+[tool.coverage.report]
+exclude_lines = [
+  "no cov",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+]
