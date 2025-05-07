@@ -118,11 +118,14 @@ def isomorphisize(
         if len(new_docstring.split("\n")) > len(function_docstring.split("\n")) + int(
             docstring_size_limit * orig_function_length
         ):
-            new_docstring = "\n".join(
-                new_docstring.split("\n")[
-                    : len(function_docstring.split("\n"))
-                    + int(docstring_size_limit * orig_function_length)
-                ]
+            new_docstring = (
+                "\n".join(
+                    new_docstring.split("\n")[
+                        : len(function_docstring.split("\n"))
+                        + int(docstring_size_limit * orig_function_length)
+                    ]
+                )
+                + '"""\n'
             )
         prompt_for_body = dedent(
             f"""
@@ -198,7 +201,7 @@ def isomorphisize_and_replace(
     return (
         replace_code_piece(file_content, docstring_start, docstring_end, new_docstring),
         docstring_start,
-        docstring_start + len(new_docstring.split("\n")),
+        docstring_start + len(new_docstring.split("\n")) + 1,
     )
 
 
