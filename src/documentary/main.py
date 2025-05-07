@@ -198,7 +198,7 @@ def isomorphisize_and_replace(
     return (
         replace_code_piece(file_content, docstring_start, docstring_end, new_docstring),
         docstring_start,
-        docstring_start + len(new_docstring.split("\n")),
+        docstring_start + len(new_docstring.split("\n")) + 1,
     )
 
 
